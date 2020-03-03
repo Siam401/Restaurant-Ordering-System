@@ -17,36 +17,41 @@
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
-
+    //category routes
     Route::get('/category','CategoryController@index')->name('category.index');
     Route::get('/category/edit/{id}','CategoryController@edit')->name('category.edit');
     Route::put('/category/update/{id}','CategoryController@update')->name('category.update');
     Route::post('/category/store','CategoryController@store')->name('category.store');
     Route::delete('/category/delete/{id}','CategoryController@destroy')->name('category.destroy');
     
+    //table routes
     Route::get('/table','TablenoController@index')->name('table.index');
     Route::get('/table/edit/{id}','TablenoController@edit')->name('table.edit');
     Route::put('/table/update/{id}','TablenoController@update')->name('table.update');
     Route::post('/table/store','TablenoController@store')->name('table.store');
     Route::delete('/table/delete/{id}','TablenoController@destroy')->name('table.destroy');
     
+    //employee routes
     Route::get('/employee','EmployeeController@index')->name('employee.index');
     Route::get('/employee/edit/{id}','EmployeeController@edit')->name('employee.edit');
     Route::put('/employee/update/{id}','EmployeeController@update')->name('employee.update');
     Route::post('/employee/store','EmployeeController@store')->name('employee.store');
     Route::delete('/employee/delete/{id}','EmployeeController@destroy')->name('employee.destroy');
     
+    //item routes
     Route::get('/item','ItemController@index')->name('item.index');
     Route::get('/item/edit/{id}','ItemController@edit')->name('item.edit');
     Route::put('/item/update/{id}','ItemController@update')->name('item.update');
     Route::post('/item/store','ItemController@store')->name('item.store');
     Route::delete('/item/delete/{id}','ItemController@destroy')->name('item.destroy');
     
+    //setitem routes
     Route::get('/setitem','SetitemController@index')->name('setitem.index');
     Route::get('/setitem/edit/{id}','SetitemController@edit')->name('setitem.edit');
     Route::put('/setitem/update/{id}','SetitemController@update')->name('setitem.update');
     Route::post('/setitem/store','SetitemController@store')->name('setitem.store');
     
+    //order routes
     Route::get('/all/order','OrderController@allorder')->name('order.all');
     Route::get('/panding/order','OrderController@index')->name('order.index');
     Route::get('/order/complete','OrderController@completeorders')->name('order.complete');
@@ -64,7 +69,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/order/{invoice}/bill','OrderController@billprint')->name('order.bill');
     Route::get('/order/{invoice}/preview','OrderController@preview')->name('order.preview');
     Route::get('/order/{invoice}/chef/preview','OrderController@chefpreview')->name('order.chefpreview');
-   
     Route::get('/place/order','OrderController@placeOrder')->name('order.create');
     Route::get('/place/order/{id}','OrderController@storeOrdertamp')->name('order.tamp');
     Route::post('/place/set/order','OrderController@placesetOrder')->name('order.set');
@@ -77,6 +81,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 Auth::routes();
 
+//API routes
 Route::get('send','Api@Data_Send');
 Route::get('OrderReceive','Api@Order_Receive');
 Route::get('Cooking','Api@Cooking_Man');
@@ -86,4 +91,4 @@ Route::get('LoginCheck','Api@logincheck');
 Route::get('Reciptprint','Api@recipt');
 
 //extra
-Route::get('/table ','TableController@index')->name('table.data');
+Route::get('table ','TableController@index')->name('table.data');

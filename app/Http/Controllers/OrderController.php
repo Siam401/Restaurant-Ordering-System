@@ -269,7 +269,7 @@ class OrderController extends Controller
                 $price=$stock->price*$quantity;
                 DB::table('ordertamps')->where('itemid', $id)->update(['quantity' => $quantity,'price'=>$price]);
 
-                $tamp_all_data=DB::table('ordertamps')->get();
+                $tamp_all_data=DB::table('ordertamps')->orderBy('id','ASC')->get();
 
                 return Response::json($tamp_all_data);
             }else{
@@ -281,7 +281,7 @@ class OrderController extends Controller
                 $item['itemid']=$stock->id;
 
                 Ordertamp::create($item);
-                $tamp_all_data=DB::table('ordertamps')->get();
+                $tamp_all_data=DB::table('ordertamps')->orderBy('id','ASC')->get();
 
                 return Response::json($tamp_all_data);
             }
@@ -397,7 +397,8 @@ class OrderController extends Controller
             }
         }
 
-        $tamps=Ordertamp::all();
+        // $tamps=Ordertamp::all();
+        $tamps=DB::table('ordertamps')->orderBy('id','ASC')->get();
         return Response::json($tamps);
 
         // return redirect(route('order.create'));

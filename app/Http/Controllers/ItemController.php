@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Item;
 use Session;
+use DB;
 
 class ItemController extends Controller
 {
@@ -16,7 +17,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items=Item::all();
+        // $items=Item::all();
+        $items=DB::table('items')->get();
+        // $items=DB::select( DB::raw("select * from items"));
         $categories=Category::all();
 
         return view('backend.items.index',compact('items','categories'));

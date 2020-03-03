@@ -92,7 +92,7 @@
                                                         $itemids=$setitem->selecteditem;
                                                         $itemid=explode(',',$itemids);
                                                     ?>
-                                                    <tr>
+                                                    <tr style="border-bottom:1pt solid #D2D2D2;">
                                                         <td colspan="4">
                                                         @foreach($itemid as $item)
                                                         <?php
@@ -136,6 +136,21 @@
                                         </div>
                                         <input type="submit" style="display: none">
                                         </form> --}}
+                                        <form method="post" action="{{ route('order.send') }}">
+                                                @csrf    
+                                                    <div id="total_count">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Table No</label>
+                                                            <div class="col-sm-9">
+                                                                <select onchange="enableOrderButton()" name="tableno" class="form-control fill" required>
+                                                                    <option value="">Select Table No</option>
+                                                                    @foreach($tablenos as $tableno)
+                                                                        <option value="{{ $tableno->title }}">{{ $tableno->title }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <table class="table table-borderless  mt-1">
                                                         <thead>
                                                             <tr>
@@ -186,21 +201,7 @@
                                                         </tbody>
                                                     </table>
                                                     
-                                                    <form method="post" action="{{ route('order.send') }}">
-                                                    @csrf    
-                                                        <div id="total_count">
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-3 col-form-label">Table No</label>
-                                                                <div class="col-sm-9">
-                                                                    <select onchange="enableOrderButton()" name="tableno" class="form-control fill" required>
-                                                                        <option value="">Select Table No</option>
-                                                                        @foreach($tablenos as $tableno)
-                                                                            <option value="{{ $tableno->title }}">{{ $tableno->title }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    
                                                         <hr>
                                                         {{-- <a href="#" onclick="return(confirm('Are You Sure to Discard'))" class="btn btn-danger btn-min-width ml-2 mb-1 float-left"><i class="fa fa-remove"></i> Discard Sales</a> --}}
                                                         <button type="submit" id="complete-order" class="btn btn-info btn-min-width mr-1 mb-1" style="float: right" disabled><i class="fa fa-paper-plane"></i> Send Order</button>

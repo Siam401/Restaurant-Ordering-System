@@ -63,14 +63,14 @@
                             </li>
                         </ul>
                     </li>
-                {{-- <li class="{{ (request()->is('sale')) ? 'active' : '' }}">
+                <li class="{{ (request()->is('sale')) ? 'active' : '' }}">
                     <a href="{{ route('order.sale') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
                             <i class="fa fa-barcode"></i>
                         </span>
                         <span class="pcoded-mtext">Sale</span>
                     </a>
-                </li> --}}
+                </li>
                 <li class="{{ (request()->is('place/order')) ? 'active' : '' }}">
                     <a href="{{ route('order.create') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon">

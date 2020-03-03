@@ -64,6 +64,7 @@ class Api extends Controller
     	}
 
     }
+    
     public function Order_Receive(Request $request)
     {
         $apikey  ='1234';
