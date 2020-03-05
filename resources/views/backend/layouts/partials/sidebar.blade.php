@@ -11,6 +11,22 @@
                         <span class="pcoded-mtext">Category</span>
                     </a>
                 </li>
+                <li class="{{ (request()->is('ingredient')) ? 'active' : '' }}">
+                    <a href="{{ route('ingredient.index') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="fa fa-shopping-cart"></i>
+                        </span>
+                        <span class="pcoded-mtext">Ingredient</span>
+                    </a>
+                </li>
+                <li class="{{ (request()->is('ipackage')) ? 'active' : '' }}">
+                    <a href="{{ route('ipackage.index') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="fa fa-shopping-basket"></i>
+                        </span>
+                        <span class="pcoded-mtext">Package</span>
+                    </a>
+                </li>
                 <li class="{{ (request()->is('table')) ? 'active' : '' }}">
                     <a href="{{ route('table.index') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
@@ -75,7 +91,7 @@
                     <a href="{{ route('order.create') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
                             {{-- <i class="feather icon-menu"></i> --}}
-                            <i class="fa fa-barcode"></i>
+                            <i class="fa fa-location-arrow"></i>
                         </span>
                         <span class="pcoded-mtext">Order</span>
                     </a>

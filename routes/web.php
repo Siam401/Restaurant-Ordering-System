@@ -24,6 +24,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/category/store','CategoryController@store')->name('category.store');
     Route::delete('/category/delete/{id}','CategoryController@destroy')->name('category.destroy');
     
+    //ingredient routes
+    Route::get('/ingredient','IngredientController@index')->name('ingredient.index');
+    Route::get('/ingredient/edit/{id}','IngredientController@edit')->name('ingredient.edit');
+    Route::put('/ingredient/update/{id}','IngredientController@update')->name('ingredient.update');
+    Route::post('/ingredient/store','IngredientController@store')->name('ingredient.store');
+    Route::delete('/ingredient/delete/{id}','IngredientController@destroy')->name('ingredient.destroy');
+    
+    //ipackage routes
+    Route::get('/ipackage','IpackageController@index')->name('ipackage.index');
+    Route::get('/ipackage/edit/{id}','IpackageController@edit')->name('ipackage.edit');
+    Route::put('/ipackage/update/{id}','IpackageController@update')->name('ipackage.update');
+    Route::post('/ipackage/store','IpackageController@store')->name('ipackage.store');
+    Route::delete('/ipackage/delete/{id}','IpackageController@destroy')->name('ipackage.destroy');
+    
     //table routes
     Route::get('/table','TablenoController@index')->name('table.index');
     Route::get('/table/edit/{id}','TablenoController@edit')->name('table.edit');
@@ -92,3 +106,8 @@ Route::get('Reciptprint','Api@recipt');
 
 //extra
 Route::get('table ','TableController@index')->name('table.data');
+
+//ajax call
+Route::get('ingredient/all','IpackageController@getIngredient')->name('ingredient.all');
+Route::get('ipackage/all','IpackageController@getIpackage')->name('ipackage.all');
+Route::get('ipackage/show/{id}','IpackageController@showPackageDetail')->name('ipackage.showPackageDetail');
