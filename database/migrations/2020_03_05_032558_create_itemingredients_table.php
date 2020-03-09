@@ -19,7 +19,7 @@ class CreateItemingredientsTable extends Migration
             $table->integer('ingredientid')->nullable();
             $table->integer('ingredientunit')->nullable();
             $table->integer('ingredientquantity')->nullable();
-            $table->integer('packageid')->nullable();
+            $table->string('packageid')->nullable();
             $table->integer('packagequantity')->nullable();
             $table->timestamps();
 

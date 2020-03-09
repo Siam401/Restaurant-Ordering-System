@@ -105,7 +105,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Price</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="price" class="form-control" placeholder="Type price" required>
+                                        <input type="number" min="0" name="price" class="form-control" placeholder="Type price" required>
                                     </div>
                                 </div> 
                             </div>
@@ -113,7 +113,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Quantity</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="quantity" class="form-control" placeholder="Type quantity" required>
+                                        <input type="number" min="0" name="quantity" class="form-control" placeholder="Type quantity" required>
                                     </div>
                                 </div> 
                             </div>

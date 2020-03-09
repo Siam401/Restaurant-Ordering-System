@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Item;
 use App\Ingredient;
+use App\Itemingredient;
 use App\Ipackage;
 use App\Unit;
 use Session;
 use DB;
+use Carbon\Carbon;
 
 class ItemController extends Controller
 {
@@ -50,18 +52,45 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        $current_date_time = Carbon::now()->toDateTimeString();
         $data=$request->except('_token');
         $categoryid=$data['categoryid'];
         $categoryid=explode("-", $data['categoryid']);
         $data['categoryid'] = $categoryid[0];
-        // dd($data['packageid'][0]);
-        if($data['ingredientid'][0] = "null" and $data['packageid'][0] ="null")
+        // dd(is_null($data['ingredientid'][0]));
+        // dd($data);
+        if(is_null($data['ingredientid'][0]) and is_null($data['packageid'][0]))
         {
             Session::flash('error','ingredient and package both can not be empty !');
             return redirect(route('item.index'));
+        }else{
+            $item=Item::create($data);
+            $itemid=$item->id;
+            if(!is_null($data['packageid'][0]))
+            {
+                $packageid_array=$data['packageid'];
+                $packagecount=count($packageid_array);
+                for($i=0;$i<$packagecount;$i++){
+                    $packageid=$data['packageid'][$i];
+                    $packagequantity=$data['packagequantity'][$i];
+    
+                    DB::table("itemingredients")->insert(["itemid"=>$itemid,"packageid"=>$packageid,"packagequantity"=>$packagequantity,"created_at"=>$current_date_time,"updated_at"=>$current_date_time]);
+                }
+            }
+            if(!is_null($data['ingredientid'][0]))
+            {
+                $ingredientid_array=$data['ingredientid'];
+                $ingredientcount=count($ingredientid_array);
+                for($i=0;$i<$ingredientcount;$i++){
+                    $ingredientid=$data['ingredientid'][$i];
+                    $ingredientunit=$data['ingredientunit'][$i];
+                    $ingredientquantity=$data['ingredientquantity'][$i];
+    
+                    DB::table("itemingredients")->insert(["itemid"=>$itemid,"ingredientid"=>$ingredientid,"ingredientunit"=>$ingredientunit,"ingredientquantity"=>$ingredientquantity,"created_at"=>$current_date_time,"updated_at"=>$current_date_time]);
+                }
+            }
         }
-        dd('siam');
-        Item::create($data);
+        
         Session::flash('message','Item created successfully');
         return redirect(route('item.index'));
     }
@@ -115,7 +144,8 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
+        DB::table('itemingredients')->where('itemid', $id)->delete();
+        // dd($itemingredients);
         $item=Item::findOrfail($id);
         $item->delete();
         Session::flash('message','Deleted successfully');
